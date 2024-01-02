@@ -8,10 +8,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://Naim:Naim123@curd.gploutp.mongodb.net/your_database_name?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect("mongodb+srv://Naim:Naim123@curd.gploutp.mongodb.net/your_database_name?retryWrites=true&w=majority");
 
 
 
@@ -20,9 +17,11 @@ app.get('/',(req, res)=>{
 })
 
 app.post("/creatUser", (req, res)=>{
+    console.log("Request Body:", req.body);
     UsersModel.create(req.body )
     .then(users => res.json(users))
-    .then(err => res.json(err))
+    .catch(err => res.json(err))
+
 })
 
 app.listen(port, ()=>{

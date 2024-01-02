@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 function CreateUser() {
+  const [name , setName] = useState('')
+  const [email , setEmail] = useState('')
+  const [age , setAge] = useState('')
+  const HandelSubmit =(event)=>{
+    event.preventDefault();
+    axios.post('http://localhost:5000/creatUser', {name, email , age})
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+  }
   return (
     <>
       <div className="d-flex vh-100 bg-success justify-content-center align-items-center">
@@ -14,10 +25,10 @@ function CreateUser() {
               <button className="btn btn-sm btn-outline-secondary" type="button">
                 Smaller button
               </button>
-            </form>
+            </form >
           </nav>
 
-          <form >
+          <form onSubmit={HandelSubmit} >
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">
                 Name
@@ -26,6 +37,7 @@ function CreateUser() {
                 type="text"
                 className="form-control"
                 id="exampleInputPassword1"
+                onChange={(e)=>{setName(e.target.value)}}
               />
             </div>
             <div className="mb-3">
@@ -37,6 +49,7 @@ function CreateUser() {
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
+                onChange={(e)=>{setEmail(e.target.value)}}
               />
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
@@ -50,6 +63,7 @@ function CreateUser() {
                 type="text"
                 className="form-control"
                 id="exampleInputEmail1"
+                onChange={(e)=>{setAge(e.target.value)}}
               />
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
