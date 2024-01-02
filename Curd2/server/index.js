@@ -13,7 +13,9 @@ mongoose.connect("mongodb+srv://Naim:Naim123@curd.gploutp.mongodb.net/your_datab
 
 
 app.get('/',(req, res)=>{
-    res.send(`hi my name is naim sheikh`)
+    UsersModel.find({})
+    .then(users=> res.json(users))
+    .catch(err => res.json(err))
 })
 
 app.post("/creatUser", (req, res)=>{

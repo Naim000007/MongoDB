@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const Users = () => {
-  const [users, setUsers] = useState([
-    {
-      Name: "Naim",
-      Email: "mdnaim01303202218@gmail.com",
-      Age: 23,
-    },
-  ]);
+  const [users, setUsers] = useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:5000')
+    .then(res => setUsers(res.data))
+    .catch(err => console.error('Error fetching users:', err));
+  },[])
   return (
     <>
-      <div className="d-flex vh-100 bg-success justify-content-center alingn-items-center">
+      <div className="d-flex vh-auto bg-success justify-content-center alingn-items-center">
         <div className="w-50 bg-white rounded p-3">
           <nav className="navbar bg-body-tertiary">
             <form className="container-fluid justify-content-start">
@@ -35,55 +35,47 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => {
-                return (
-                  <tr>
-                    <th scope="row"></th>
-                    <td>{user.Name}</td>
-                    <td>{user.Email}</td>
-                    <td>{user.Age}</td>
-                    <td>
-                      <Link to='/update'><button>Edit</button></Link>
-                      <button>Delete</button>
-                      {/* <button>button</button> */}
-                    </td>
-                  </tr>
-                );
-              })}
+              {
+                users.map(user =>(<tr>
+                  <th scope="row"></th>
+                   <td>{user.name}</td>
+                   <td>{user.email}</td>
+                   <td>{user.age}</td>
+                   <td>
+                    <Link to='/update' ><button className="btn btn-success">Update</button></Link>
+                    <button className="btn btn-denger">Delete</button>
+                   </td>
+                </tr>))
+              }
             </tbody>
           </table>
         </div>
       </div>
     </>
+    // <>
+    // {
+    //   users.map(i => <h1>{i.name}</h1> )
+    // }
+    // </>
   );
 };
 
 export default Users;
-/* 
-<div className='d-flex vh-100 bg-primary justify-content-center alingn-items-center'>
-        <div className='w-50 bg-white rounded p-3'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Age</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-          </table>
-          <tbody>
-            {
-              users.map(user =>{
-               return  <tr>
-               <td>{user.Name}</td>
-               <td>{user.Email}</td>
-               <td>{user.Age}</td>
-               <td><button>Edit</button><button>Delete</button></td>
-             </tr>
-              })
-            }
-          </tbody>
-        </div>
-      </div>
-*/
+// {users.map(user => {
+                
+  //              (
+  //               <tr>
+  //                 {/* console.log(user.name) */}
+  //                 <th scope="row"></th>
+  //                 <td>{user.name}</td>
+  //                 <td>{user.email}</td>
+  //                 <td>{user.age}</td>
+  //                 <h1>{user.name}</h1>
+  //                 <td>
+  //                   <Link to='/update' className="btn btn-success"><button>Update</button></Link>
+  //                   <button className="btn btn-denger">Delete</button>
+  //                   {/* <button>button</button> */}
+  //                 </td>
+  //               </tr>
+  //             );
+  //           })}
