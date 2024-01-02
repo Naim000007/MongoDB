@@ -17,7 +17,7 @@ function CreateUser() {
             </form>
           </nav>
 
-          <form>
+          <form >
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">
                 Name
