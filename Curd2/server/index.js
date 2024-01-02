@@ -8,7 +8,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://Naim:Naim123@curd.gploutp.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://Naim:Naim123@curd.gploutp.mongodb.net/your_database_name?retryWrites=true&w=majority", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 
 
 app.get('/',(req, res)=>{
